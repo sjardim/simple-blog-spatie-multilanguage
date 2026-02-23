@@ -6,111 +6,55 @@
     <article class="max-w-7xl mx-auto px-4 py-8">
         <!-- Article Header -->
         <header class="max-w-3xl mx-auto mb-8">
-            @if($post->category)
-                <a href="{{ route('posts.category', $post->category->slug) }}" class="inline-block text-ft-pink text-xs font-semibold uppercase tracking-wider mb-4 hover:underline">
-                    {{ $post->category->getTranslation('name', app()->getLocale()) }}
-                </a>
-            @endif
+            <x-category-badge :category="$post->category" :link="true" class="mb-4" />
             
             <!-- Tags -->
-            @if($post->tags->count() > 0)
-                <div class="flex flex-wrap gap-2 mb-4">
-                    @foreach($post->tags as $tag)
-                        <span class="inline-block px-2 py-1 text-xs rounded-md bg-ft-salmon-dark text-ft-black">
-                            {{ $tag->name }}
-                        </span>
-                    @endforeach
-                </div>
-            @endif
-            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ft-black leading-tight mb-6">
+            <x-post-tags :tags="$post->tags" class="mb-4" size="large" />
+            
+            <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-black leading-tight mb-6 dark:text-dark-text">
                 {{ $post->title }}
             </h1>
-            <div class="flex items-center gap-4 text-ft-gray text-sm pb-6 border-b border-ft-border">
+            <div class="flex items-center gap-4 text-gray text-sm pb-6 border-b border-border dark:text-dark-text-muted dark:border-dark-border">
                 <span>{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('F j, Y') }}</span>
-                <span class="text-ft-border">|</span>
+                <span class="text-border dark:text-dark-border">|</span>
                 @php
                 $readTime = Str::readTime($post->content)
                 @endphp
                 <span>{{ $readTime }} {{ trans_choice('messages.minutes', $readTime) }} {{ __('messages.read_time') }}</span>
-                <span class="text-ft-border">|</span>
+                <span class="text-border dark:text-dark-border">|</span>
                 <span>{{ Str::wordCount($post->content) }} {{ __('messages.words') }}</span>
             </div>
         </header>
 
         <!-- Featured Image -->
-        @if($post->image_url)
-            <div class="aspect-video bg-ft-salmon-dark rounded-lg mb-8 max-w-4xl mx-auto overflow-hidden">
-                <img src="{{ $post->image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover">
-            </div>
-        @else
-            <div class="aspect-video bg-ft-salmon-dark rounded-lg mb-8 max-w-4xl mx-auto flex items-center justify-center">
-                <svg class="w-24 h-24 text-ft-border" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-            </div>
-        @endif
+        <div class="max-w-4xl mx-auto mb-8">
+            <x-post-image :post="$post" size="large" />
+        </div>
 
         <!-- Article Content -->
         <div class="max-w-3xl mx-auto">
             <div class="prose prose-lg max-w-none">
-                <div class="text-ft-black text-lg leading-relaxed space-y-6">
+                <div class="text-black text-lg leading-relaxed space-y-6 dark:text-dark-text">
                     {!! nl2br(e($post->content)) !!}
                 </div>
             </div>
 
             <!-- Article Footer -->
-            <footer class="mt-12 pt-8 border-t border-ft-border">
+            <footer class="mt-12 pt-8 border-t border-border dark:border-dark-border">
                 <!-- Language Switcher -->
-                <div class="bg-ft-salmon-dark rounded-lg p-6 mb-8">
-                    <h3 class="font-serif text-lg text-ft-black mb-4">{{ __('messages.read_another_language') }}</h3>
-                    <div class="flex flex-wrap gap-3">
-                        @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                            @php
-                                $localizedUrl = LaravelLocalization::getLocalizedURL($localeCode);
-                            @endphp
-                            <a href="{{ $localizedUrl }}" 
-                               class="px-4 py-2 rounded-md text-sm font-medium transition-colors {{ app()->getLocale() === $localeCode ? 'bg-ft-black text-white' : 'bg-white text-ft-black hover:bg-ft-border' }}">
-                                {{ $properties['native'] }}
-                            </a>
-                        @endforeach
-                    </div>
+                <div class="bg-salmon-dark rounded-lg p-6 mb-8 dark:bg-dark-surface">
+                    <h3 class="font-serif text-lg text-black mb-4 dark:text-dark-text">{{ __('messages.read_another_language') }}</h3>
+                    <x-language-switcher />
                 </div>
 
                 <!-- Share -->
-                <div class="flex items-center gap-4">
-                    <span class="text-ft-gray text-sm">{{ __('messages.article.share') }}:</span>
-                    <div class="flex gap-2">
-                        <a href="https://twitter.com/intent/tweet?text={{ urlencode($post->title) }}&url={{ urlencode(request()->url()) }}" 
-                           target="_blank"
-                           class="p-2 rounded-full bg-ft-salmon-dark hover:bg-ft-border transition-colors text-ft-black"
-                           aria-label="{{ __('messages.article.share_twitter') }}">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ urlencode(request()->url()) }}" 
-                           target="_blank"
-                           class="p-2 rounded-full bg-ft-salmon-dark hover:bg-ft-border transition-colors text-ft-black"
-                           aria-label="{{ __('messages.article.share_linkedin') }}">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                            </svg>
-                        </a>
-                        <button onclick="navigator.clipboard.writeText(window.location.href); alert('{{ __('messages.actions.link_copied') }}')" 
-                                class="p-2 rounded-full bg-ft-salmon-dark hover:bg-ft-border transition-colors text-ft-black"
-                                aria-label="{{ __('messages.actions.copy_link') }}">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
+                <x-share-buttons :title="$post->title" />
             </footer>
         </div>
 
         <!-- Back to Posts -->
         <div class="max-w-3xl mx-auto mt-8">
-            <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2 text-ft-link hover:text-ft-link-hover font-medium">
+            <a href="{{ route('posts.index') }}" class="inline-flex items-center gap-2 text-link hover:text-link-hover font-medium dark:text-dark-link dark:hover:text-dark-link-hover">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
