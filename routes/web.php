@@ -1,16 +1,24 @@
 <?php
 
 use App\Http\Controllers\PostController;
-use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::group(
+    [
+    'prefix' => LaravelLocalization::setLocale(),
+	'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], 
+    function()
+{
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('home');
 
-Route::get('/posts/{post}', [PostController::class, 'show'])
-->name('posts.show');
-
-// Route::get('/posts/{post}', function (Post $post) {
-//     dd($post);
-// })->name('posts.show');
+	// Route::get('/posts/{post}', [PostController::class, 'show'])
+    //     ->name('posts.show');
+    
+     Route::get(LaravelLocalization::transRoute('routes.post'), [PostController::class, 'show'])
+        ->name('posts.show');
+        
+});

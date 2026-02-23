@@ -11,6 +11,8 @@
 |
 */
 
+use Mcamara\LaravelLocalization\LaravelLocalization;
+
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
     ->in('Feature');
@@ -45,3 +47,18 @@ function something()
 {
     // ..
 }
+
+function refreshApplicationWithLocale(string $locale): void
+{
+    /** @var \Tests\TestCase $test */
+    $test = test();
+
+    $test->tearDown();
+    putenv(LaravelLocalization::ENV_ROUTE_KEY . '=' . $locale);
+    $test->setUp();
+}
+
+pest()->afterEach(function () {
+    putenv(LaravelLocalization::ENV_ROUTE_KEY);
+});
+
