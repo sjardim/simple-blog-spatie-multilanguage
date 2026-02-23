@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('title');
             $table->json('slug')->unique();
             $table->json('content');
+            $table->string('image_url')->nullable();
             
             $table->timestamps();
         });

@@ -29,6 +29,7 @@ class PostFactory extends Factory
                 'pt' => fake('pt_PT')->paragraphs(3, true),
             ],
             'category_id' => Category::factory(),
+            'image_url' => 'https://picsum.photos/seed/' . fake()->uuid() . '/800/450',
         ];
     }
 }
