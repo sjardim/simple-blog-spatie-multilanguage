@@ -5,16 +5,28 @@
 
 /* Financial Times Inspired Theme */
 @theme {
-    /* FT Salmon Pink */
-    --color-ft-salmon: #FFF1E5;
-    --color-ft-salmon-dark: #F2DFCE;
-    --color-ft-pink: #9E2F50;
-    --color-ft-black: #33302E;
-    --color-ft-gray: #66605C;
-    --color-ft-gray-light: #9E9E9E;
-    --color-ft-border: #CCC1B7;
-    --color-ft-link: #0D7680;
-    --color-ft-link-hover: #0A5E66;
+    /* FT Salmon Pink - Light Mode */
+    --color-salmon: #FFF1E5;
+    --color-salmon-dark: #F2DFCE;
+    --color-pink: #9E2F50;
+    --color-black: #33302E;
+    --color-gray: #4A4744;
+    --color-gray-light: #9E9E9E;
+    --color-border: #B8AFA6;
+    --color-link: #990000;
+    --color-link-hover: #085259;
+    
+    /* Dark Mode Colors */
+    --color-dark-bg: #1A1A1A;
+    --color-dark-surface: #262626;
+    --color-dark-surface-hover: #333333;
+    --color-dark-border: #404040;
+    --color-dark-text: #E5E5E5;
+    --color-dark-text-muted: #A3A3A3;
+    --color-dark-link: #22D3EE;
+    --color-dark-link-hover: #67E8F9;
+    --color-dark-pink: #F472B6;
+    --color-dark-salmon: #2D2A26;
     
     /* Serif fonts for headlines (FT uses Financier Display) */
     --font-serif: 'Bona Nova', 'Georgia', 'Times New Roman', serif;
@@ -26,9 +38,24 @@
 /* Base styles */
 body {
     font-family: var(--font-sans);
-    background-color: var(--color-ft-salmon);
-    color: var(--color-ft-black);
+    background-color: var(--color-salmon);
+    color: var(--color-black);
     line-height: 1.6;
+}
+
+/* Dark mode styles */
+.dark body {
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text);
+}
+
+.dark h1, 
+.dark h2, 
+.dark h3, 
+.dark h4, 
+.dark h5, 
+.dark h6 {
+    color: var(--color-dark-text);
 }
 
 /* Typography */
@@ -36,18 +63,26 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-serif);
     font-weight: 400;
     line-height: 1.2;
-    color: var(--color-ft-black);
+    color: var(--color-black);
 }
 
 /* Links */
 a {
-    color: var(--color-ft-link);
+    color: var(--color-link);
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 a:hover {
-    color: var(--color-ft-link-hover);
+    color: var(--color-link-hover);
+}
+
+.dark a {
+    color: var(--color-dark-link);
+}
+
+.dark a:hover {
+    color: var(--color-dark-link-hover);
 }
 
 /* Article card hover effect */
@@ -56,5 +91,84 @@ a:hover {
 }
 
 .article-card:hover {
-    background-color: var(--color-ft-salmon-dark);
+    background-color: var(--color-salmon-dark);
+}
+
+.dark .article-card:hover {
+    background-color: var(--color-dark-surface-hover);
+}
+
+/* Utility classes for dark mode */
+.dark .bg-salmon {
+    background-color: var(--color-dark-bg);
+}
+
+.dark .bg-salmon-dark {
+    background-color: var(--color-dark-surface);
+}
+
+.dark .bg-black {
+    background-color: var(--color-dark-text);
+}
+
+.dark .bg-border {
+    background-color: var(--color-dark-border);
+}
+
+.dark .text-black {
+    color: var(--color-dark-text);
+}
+
+.dark .text-gray {
+    color: var(--color-dark-text-muted);
+}
+
+.dark .text-pink {
+    color: var(--color-dark-pink);
+}
+
+.dark .text-link {
+    color: var(--color-dark-link);
+}
+
+.dark .border-border {
+    border-color: var(--color-dark-border);
+}
+
+.dark .hover\:text-pink:hover {
+    color: var(--color-dark-pink);
+}
+
+/* Dark mode top bar */
+.dark .bg-black {
+    background-color: #000000;
+}
+
+.dark .text-salmon-dark {
+    color: var(--color-salmon);
+}
+
+.dark .hover\:text-salmon-dark:hover {
+    color: var(--color-salmon);
+}
+
+/* Share buttons dark mode */
+.dark .bg-salmon-dark {
+    background-color: var(--color-dark-surface);
+}
+
+.dark .bg-salmon-dark:hover {
+    background-color: var(--color-dark-border);
+}
+
+.dark .text-black {
+    color: var(--color-dark-text);
+}
+
+/* Dark mode input/button styles */
+.dark button,
+.dark .bg-white {
+    background-color: var(--color-dark-surface);
+    color: var(--color-dark-text);
+    border-color: var(--color-dark-border);
 }
