@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,18 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
+        $titleEn = fake()->sentence();
+
         return [
-            //
+            'title' => [
+                'en' => $titleEn,
+                'pt' => fake('pt_PT')->sentence(),
+            ],
+            'content' => [
+                'en' => fake()->paragraphs(3, true),
+                'pt' => fake('pt_PT')->paragraphs(3, true),
+            ],
+            'category_id' => Category::factory(),
         ];
     }
 }

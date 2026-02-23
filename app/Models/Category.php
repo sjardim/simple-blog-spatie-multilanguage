@@ -4,35 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
-class Post extends Model implements LocalizedUrlRoutable
+class Category extends Model implements LocalizedUrlRoutable
 {
-    /** @use HasFactory<\Database\Factories\PostFactory> */
+    /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
     use HasTranslations;
     use HasTranslatableSlug;
 
-    public array $translatable = ['title', 'slug', 'content'];
+    public array $translatable = ['name', 'slug'];
 
     /**
      * Get the route key for the model.
-     *
-     * @return string
      */
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
-       
-    public function getSlugOptions() : SlugOptions
+
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 
@@ -42,10 +40,10 @@ class Post extends Model implements LocalizedUrlRoutable
     }
 
     /**
-     * @return BelongsTo<Category, Post>
+     * @return HasMany<Post, Category>
      */
-    public function category(): BelongsTo
+    public function posts(): HasMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Post::class);
     }
 }

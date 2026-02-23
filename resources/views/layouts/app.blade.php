@@ -7,6 +7,10 @@
     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
     <link rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode) }}">
     @endforeach
+    {{-- Google Fonts: JetBrains Mono + Space Grotesk --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css'])
 </head>
 <body>
