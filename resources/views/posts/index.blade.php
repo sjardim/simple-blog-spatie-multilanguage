@@ -11,7 +11,7 @@
         </div>
 
         <!-- Categories Filter -->
-        <x-category-filter :categories="$categories" :selectedCategory="$selectedCategory" />
+        <x-category-filter :categories="$categories" :selectedCategory="$selectedCategory" :categoryCounts="$categoryCounts" />
 
         <!-- Featured Post (First Post) -->
         @if($posts->count() > 0)

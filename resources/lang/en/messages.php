@@ -20,6 +20,7 @@ return [
         'title' => 'Posts',
         'subtitle' => 'Explore our latest articles and insights.',
         'all' => 'All',
+        'all_categories' => 'All',
         'latest' => 'Latest Posts',        
         'no_posts' => 'No posts available yet.',        
         'back_to_all' => 'Back to all posts',

@@ -21,6 +21,7 @@ return [
         'title' => 'Artigos',
         'subtitle' => 'Explore os nossos últimos artigos e perspetivas.',
         'all' => 'Todos',
+        'all_categories' => 'Todas',
         'latest' => 'Últimos Artigos',        
         'no_posts' => 'Ainda não existem artigos disponíveis.',        
         'back_to_all' => 'Voltar a todos os artigos',

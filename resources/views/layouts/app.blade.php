@@ -43,7 +43,7 @@
                 </button>
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                     <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" 
-                       class="hover:text-salmon-dark dark:hover:text-gray-300 {{ app()->getLocale() === $localeCode ? 'text-salmon font-semibold' : 'text-white' }}">
+                       class="hover:text-salmon-dark dark:hover:text-gray-300 text-white! font-semibold {{ app()->getLocale() === $localeCode ? 'opacity-50 cursor-default' : 'opacity-100' }}">
                         {{ strtoupper($localeCode) }}
                     </a>
                 @endforeach

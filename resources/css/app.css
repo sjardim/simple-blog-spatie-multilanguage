@@ -12,7 +12,8 @@
     --color-black: #33302E;
     --color-gray: #4A4744;
     --color-gray-light: #9E9E9E;
-    --color-border: #B8AFA6;
+    --color-border: #F2DFCE;
+    --color-highlight: #FFFFFF;
     --color-link: #990000;
     --color-link-hover: #085259;
     
@@ -25,6 +26,7 @@
     --color-dark-text-muted: #A3A3A3;
     --color-dark-link: #22D3EE;
     --color-dark-link-hover: #67E8F9;
+    --color-dark-highlight: #333333;
     --color-dark-pink: #F472B6;
     --color-dark-salmon: #2D2A26;
     

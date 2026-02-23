@@ -20,7 +20,7 @@
             $localizedUrl = LaravelLocalization::getLocalizedURL($localeCode);
         @endphp
         <a href="{{ $localizedUrl }}" 
-           class="{{ $buttonClasses }} rounded-md text-sm font-medium transition-colors {{ app()->getLocale() === $localeCode ? 'bg-black text-white dark:bg-dark-text dark:text-dark-bg' : 'bg-white text-black hover:bg-border dark:bg-dark-surface-hover dark:text-dark-text dark:hover:bg-dark-border' }}">
+           class="{{ $buttonClasses }} rounded-md text-sm font-medium transition-colors {{ app()->getLocale() === $localeCode ? 'bg-salmon cursor-default dark:bg-dark-text dark:text-dark-bg' : 'bg-white text-black hover:bg-border dark:bg-dark-surface-hover dark:text-dark-text dark:hover:bg-dark-border' }}">
             {{ $properties['native'] }}
         </a>
     @endforeach
