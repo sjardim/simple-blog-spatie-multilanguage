@@ -18,7 +18,10 @@ Route::group(
 	// Route::get('/posts/{post}', [PostController::class, 'show'])
     //     ->name('posts.show');
 
-     Route::get(LaravelLocalization::transRoute('routes.post'), [PostController::class, 'show'])
+    Route::get(LaravelLocalization::transRoute('routes.posts'), [PostController::class, 'index'])
+        ->name('posts.index');
+
+    Route::get(LaravelLocalization::transRoute('routes.post'), [PostController::class, 'show'])
         ->name('posts.show');
 
     // Route::get(LaravelLocalization::transRoute('routes.news.index'), [PostController::class, 'show'])
