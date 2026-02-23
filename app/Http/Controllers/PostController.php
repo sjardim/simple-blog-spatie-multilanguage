@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index(?Category $category = null)
+    public function index(Request $request, ?string $slug = null)
     {
+        // Query using JSON containment for translatable slug
+        $category = $slug 
+            ? Category::where('slug', 'like', '%"'.$slug.'"%')->first() 
+            : null;
+        
         $posts = $category 
             ? $category->posts()->get()
             : Post::all();

@@ -16,7 +16,7 @@ test('can visit posts index page', function () {
 test('can visit posts index page in Portuguese', function () {
     refreshApplicationWithLocale('pt');
 
-    $response = $this->get('/pt/posts');
+    $response = $this->get('/pt/artigos');
 
     $response->assertStatus(200);
 });
@@ -166,7 +166,7 @@ test('category in Portuguese shows Portuguese name', function () {
         'slug' => ['en' => 'tech', 'pt' => 'tecnologia'],
     ]);
 
-    $response = $this->get('/pt/posts');
+    $response = $this->get('/pt/artigos');
 
     $response->assertStatus(200);
     $response->assertSee('Tecnologia');
@@ -182,8 +182,71 @@ test('category filtering works in Portuguese', function () {
 
     $post = Post::factory()->create(['category_id' => $category->id]);
 
-    $response = $this->get('/pt/news/category/tecnologia');
+    $response = $this->get('/pt/noticias/categoria/tecnologia');
 
     $response->assertStatus(200);
     $response->assertSee($post->title);
+});
+
+test('category filtering shows only posts from that category', function () {
+    refreshApplicationWithLocale('en');
+
+    $category = Category::factory()->create([
+        'name' => ['en' => 'Tech', 'pt' => 'Tecnologia'],
+        'slug' => ['en' => 'tech-category', 'pt' => 'categoria-tecnologia'],
+    ]);
+    
+    $otherCategory = Category::factory()->create([
+        'name' => ['en' => 'Sports', 'pt' => 'Desporto'],
+        'slug' => ['en' => 'sports-category', 'pt' => 'categoria-desporto'],
+    ]);
+
+    $postInTech = Post::factory()->create(['category_id' => $category->id, 'title' => 'Tech Post Title']);
+    $postInSports = Post::factory()->create(['category_id' => $otherCategory->id, 'title' => 'Sports Post Title']);
+    $postWithoutCategory = Post::factory()->create(['category_id' => null, 'title' => 'Uncategorized Post']);
+
+    $response = $this->get('/en/news/category/tech-category');
+
+    $response->assertStatus(200);
+    // Should see the tech post
+    $response->assertSee('Tech Post Title');
+    // Should NOT see the sports post
+    $response->assertDontSee('Sports Post Title');
+    // Should NOT see the uncategorized post
+    $response->assertDontSee('Uncategorized Post');
+});
+
+test('category filter returns all posts when slug does not match', function () {
+    refreshApplicationWithLocale('en');
+
+    $category = Category::factory()->create([
+        'name' => ['en' => 'Tech', 'pt' => 'Tecnologia'],
+        'slug' => ['en' => 'tech', 'pt' => 'tecnologia'],
+    ]);
+
+    $post1 = Post::factory()->create(['category_id' => $category->id, 'title' => 'Post 1']);
+    $post2 = Post::factory()->create(['title' => 'Post 2']);
+
+    // Using a non-existent category slug should show all posts
+    $response = $this->get('/en/news/category/non-existent-slug');
+
+    $response->assertStatus(200);
+    // Since category is not found, it shows all posts (current behavior)
+    $response->assertSee('Post 1');
+    $response->assertSee('Post 2');
+});
+
+test('category links on index page lead to filtered view', function () {
+    refreshApplicationWithLocale('en');
+
+    $category = Category::factory()->create([
+        'name' => ['en' => 'Test Category', 'pt' => 'Categoria de Teste'],
+        'slug' => ['en' => 'test-cat-link', 'pt' => 'cat-teste-link'],
+    ]);
+
+    $response = $this->get('/en/posts');
+    $response->assertStatus(200);
+    
+    // The category link should be present on the page
+    $response->assertSee('news/category/test-cat-link');
 });

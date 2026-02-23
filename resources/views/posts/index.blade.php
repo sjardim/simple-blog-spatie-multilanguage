@@ -53,6 +53,18 @@
                                     {{ $featuredPost->category->getTranslation('name', app()->getLocale()) }}
                                 </span>
                             @endif
+                            
+                            <!-- Tags -->
+                            @if($featuredPost->tags->count() > 0)
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    @foreach($featuredPost->tags as $tag)
+                                        <span class="inline-block px-2 py-1 text-xs rounded-md bg-ft-border text-ft-black">
+                                            {{ $tag->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @endif
+                            
                             <h2 class="font-serif text-3xl md:text-4xl text-ft-black mb-4 group-hover:text-ft-pink transition-colors">
                                 {{ $featuredPost->title }}
                             </h2>
