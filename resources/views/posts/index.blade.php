@@ -60,7 +60,7 @@
                                 {{ Str::limit(strip_tags($featuredPost->content), 200) }}
                             </p>
                             <span class="text-ft-link text-sm font-medium">
-                                {{ __('messages.posts.read_more') }} →
+                                {{ __('messages.read_more') }} →
                             </span>
                         </div>
                     </div>

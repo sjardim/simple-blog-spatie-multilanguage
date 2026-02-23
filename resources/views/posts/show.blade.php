@@ -28,7 +28,12 @@
             <div class="flex items-center gap-4 text-ft-gray text-sm pb-6 border-b border-ft-border">
                 <span>{{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('F j, Y') }}</span>
                 <span class="text-ft-border">|</span>
-                <span>{{ Str::wordCount($post->content) }} {{ __('messages.posts.words') }}</span>
+                @php
+                $readTime = Str::readTime($post->content)
+                @endphp
+                <span>{{ $readTime }} {{ trans_choice('messages.minutes', $readTime) }} {{ __('messages.read_time') }}</span>
+                <span class="text-ft-border">|</span>
+                <span>{{ Str::wordCount($post->content) }} {{ __('messages.words') }}</span>
             </div>
         </header>
 
@@ -57,7 +62,7 @@
             <footer class="mt-12 pt-8 border-t border-ft-border">
                 <!-- Language Switcher -->
                 <div class="bg-ft-salmon-dark rounded-lg p-6 mb-8">
-                    <h3 class="font-serif text-lg text-ft-black mb-4">{{ __('messages.article.read_another_language') }}</h3>
+                    <h3 class="font-serif text-lg text-ft-black mb-4">{{ __('messages.read_another_language') }}</h3>
                     <div class="flex flex-wrap gap-3">
                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                             @php

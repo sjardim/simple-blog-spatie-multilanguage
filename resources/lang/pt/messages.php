@@ -1,6 +1,14 @@
 <?php
 
 return [
+    
+    //Common
+    'words' => 'palavras',
+    'read_another_language' => 'Ler noutra língua',
+    'read_time' => 'de leitura',
+    'minutes' => '{0} minuto|[1] minuto|[2,*] minutos',
+    'read_more' => 'Ler mais',
+    
     // Navigation
     'nav' => [
         'home' => 'Início',
@@ -8,15 +16,13 @@ return [
         'all_posts' => 'Todos os Artigos',
     ],
 
-    // Posts Page
+    // Posts
     'posts' => [
         'title' => 'Artigos',
         'subtitle' => 'Explore os nossos últimos artigos e perspetivas.',
         'all' => 'Todos',
-        'latest' => 'Últimos Artigos',
-        'read_more' => 'Ler mais',
-        'no_posts' => 'Ainda não existem artigos disponíveis.',
-        'words' => 'palavras',
+        'latest' => 'Últimos Artigos',        
+        'no_posts' => 'Ainda não existem artigos disponíveis.',        
         'back_to_all' => 'Voltar a todos os artigos',
     ],
 
@@ -27,7 +33,6 @@ return [
 
     // Article Page
     'article' => [
-        'read_another_language' => 'Ler noutra língua',
         'share' => 'Partilhar este artigo',
         'share_twitter' => 'Partilhar no Twitter',
         'share_linkedin' => 'Partilhar no LinkedIn',

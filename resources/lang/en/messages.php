@@ -1,6 +1,13 @@
 <?php
 
 return [
+    // Common
+    'words' => 'words',        
+    'read_time' => 'reading time',
+    'read_another_language' => 'Read in another language',
+    'minutes' => '{0} minute|[1] minute|[2,*] minutes',
+    'read_more' => 'Read more',
+
     // Navigation
     'nav' => [
         'home' => 'Home',
@@ -13,10 +20,8 @@ return [
         'title' => 'Posts',
         'subtitle' => 'Explore our latest articles and insights.',
         'all' => 'All',
-        'latest' => 'Latest Posts',
-        'read_more' => 'Read more',
-        'no_posts' => 'No posts available yet.',
-        'words' => 'words',
+        'latest' => 'Latest Posts',        
+        'no_posts' => 'No posts available yet.',        
         'back_to_all' => 'Back to all posts',
     ],
 
@@ -27,7 +32,7 @@ return [
 
     // Article Page
     'article' => [
-        'read_another_language' => 'Read in another language',
+        
         'share' => 'Share this article',
         'share_twitter' => 'Share on Twitter',
         'share_linkedin' => 'Share on LinkedIn',

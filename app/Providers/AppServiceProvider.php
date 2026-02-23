@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Password;
 use Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
 use Spatie\Translatable\Facades\Translatable;
@@ -33,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
 
         RouteServiceProvider::loadCachedRoutesUsing(fn () => $this->loadCachedRoutes());
+
+         Str::macro('readTime', static function (string $string): int {
+            return ceil(str_word_count(Str::squish($string)) / 200);
+        });
 
         //Sometimes it is favored to return any translation 
         //if neither the translation for the preferred locale nor the fallback locale are set.
