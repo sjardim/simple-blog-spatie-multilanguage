@@ -16,10 +16,10 @@ class PostController extends Controller
             : null;
         
         $posts = $category 
-            ? $category->posts()->get()
-            : Post::all();
+            ? $category->posts()->with(['category', 'tags'])->get()
+            : Post::with(['category', 'tags'])->get();
         
-        $categories = Category::whereHas('posts')->get();
+        $categories = Category::whereHas('posts')->with('posts')->get();
 
         return view('posts.index', [
             'posts' => $posts,
