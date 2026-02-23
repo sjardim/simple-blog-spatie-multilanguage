@@ -16,14 +16,19 @@ class PostController extends Controller
             : null;
         
         $posts = $category 
-            ? $category->posts()->with(['category', 'tags'])->get()
-            : Post::with(['category', 'tags'])->get();
+            ? $category->posts()->with('tags')->get()
+            : Post::with('tags')->get();
         
-        $categories = Category::whereHas('posts')->with('posts')->get();
+        // Get unique categories from loaded posts (no extra query needed)
+        $categories = $posts->pluck('category')->filter()->unique('id')->values();
+        
+        // Calculate post counts per category
+        $categoryCounts = $posts->groupBy('category_id')->map(fn($group) => $group->count());
 
         return view('posts.index', [
             'posts' => $posts,
             'categories' => $categories,
+            'categoryCounts' => $categoryCounts,
             'selectedCategory' => $category,
         ]);
     }
