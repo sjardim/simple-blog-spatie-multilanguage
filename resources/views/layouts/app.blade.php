@@ -16,7 +16,7 @@
     <!-- Top Bar -->
     <div class="bg-ft-black text-white py-1 px-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center text-xs">
-            <span>{{ date('l, F j, Y') }}</span>
+            <span>{{ \Carbon\Carbon::now()->translatedFormat('l, F j, Y') }}</span>
             <div class="flex items-center gap-4">
                 @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                     <a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" 
@@ -43,10 +43,10 @@
                 <!-- Navigation Links -->
                 <div class="hidden md:flex items-center gap-6">
                     <a href="{{ route('home') }}" class="text-sm font-medium text-ft-black hover:text-ft-pink transition-colors">
-                        {{ __('Home') }}
+                        {{ __('messages.nav.home') }}
                     </a>
                     <a href="{{ route('posts.index') }}" class="text-sm font-medium text-ft-black hover:text-ft-pink transition-colors">
-                        {{ __('Posts') }}
+                        {{ __('messages.nav.posts') }}
                     </a>
                 </div>
 
@@ -62,10 +62,10 @@
             <div id="mobile-menu" class="hidden md:hidden pb-4">
                 <div class="flex flex-col gap-3">
                     <a href="{{ route('home') }}" class="text-sm font-medium text-ft-black hover:text-ft-pink transition-colors py-2 border-b border-ft-border">
-                        {{ __('Home') }}
+                        {{ __('messages.nav.home') }}
                     </a>
                     <a href="{{ route('posts.index') }}" class="text-sm font-medium text-ft-black hover:text-ft-pink transition-colors py-2 border-b border-ft-border">
-                        {{ __('Posts') }}
+                        {{ __('messages.nav.posts') }}
                     </a>
                 </div>
             </div>
@@ -85,22 +85,22 @@
                 <div class="col-span-1 md:col-span-2">
                     <h3 class="font-serif text-2xl mb-4">{{ config('app.name') }}</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">
-                        {{ __('A modern blog built with Laravel, featuring multilingual support and clean design inspired by the Financial Times.') }}
+                        {{ __('messages.footer.about') }}
                     </p>
                 </div>
 
                 <!-- Quick Links -->
                 <div>
-                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">{{ __('Quick Links') }}</h4>
+                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">{{ __('messages.footer.quick_links') }}</h4>
                     <ul class="space-y-2">
                         <li>
                             <a href="{{ route('home') }}" class="text-gray-400 hover:text-ft-salmon text-sm transition-colors">
-                                {{ __('Home') }}
+                                {{ __('messages.nav.home') }}
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('posts.index') }}" class="text-gray-400 hover:text-ft-salmon text-sm transition-colors">
-                                {{ __('All Posts') }}
+                                {{ __('messages.nav.all_posts') }}
                             </a>
                         </li>
                     </ul>
@@ -108,7 +108,7 @@
 
                 <!-- Languages -->
                 <div>
-                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">{{ __('Languages') }}</h4>
+                    <h4 class="font-semibold text-sm uppercase tracking-wider mb-4">{{ __('messages.footer.languages') }}</h4>
                     <ul class="space-y-2">
                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                             <li>
@@ -125,7 +125,7 @@
             <!-- Copyright -->
             <div class="border-t border-gray-700 mt-8 pt-6 text-center">
                 <p class="text-gray-500 text-sm">
-                    &copy; {{ date('Y') }} {{ config('app.name') }}. {{ __('All rights reserved.') }}
+                    &copy; {{ date('Y') }} {{ config('app.name') }}. {{ __('messages.footer.copyright') }}
                 </p>
             </div>
         </div>

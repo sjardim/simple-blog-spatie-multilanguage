@@ -6,18 +6,18 @@
     <div class="max-w-7xl mx-auto px-4 py-8">
         <!-- Page Header -->
         <div class="border-b border-ft-border pb-6 mb-8">
-            <h1 class="font-serif text-4xl md:text-5xl text-ft-black mb-2">{{ __('Posts') }}</h1>
-            <p class="text-ft-gray text-lg">{{ __('Explore our latest articles and insights.') }}</p>
+            <h1 class="font-serif text-4xl md:text-5xl text-ft-black mb-2">{{ __('messages.posts.title') }}</h1>
+            <p class="text-ft-gray text-lg">{{ __('messages.posts.subtitle') }}</p>
         </div>
 
         <!-- Categories Filter -->
         @if($categories->count() > 0)
             <div class="mb-8">
-                <h2 class="font-serif text-xl text-ft-black mb-4">{{ __('Categories') }}</h2>
+                <h2 class="font-serif text-xl text-ft-black mb-4">{{ __('messages.categories.title') }}</h2>
                 <div class="flex flex-wrap gap-3">
                     <a href="{{ route('posts.index') }}" 
                        class="px-4 py-2 rounded-md text-sm font-medium transition-colors {{ $selectedCategory === null ? 'bg-ft-black text-white' : 'bg-ft-salmon-dark text-ft-black hover:bg-ft-border' }}">
-                        {{ __('All') }}
+                        {{ __('messages.posts.all') }}
                     </a>
                     @foreach($categories as $category)
                         <a href="{{ route('posts.category', $category->slug) }}" 
@@ -60,7 +60,7 @@
                                 {{ Str::limit(strip_tags($featuredPost->content), 200) }}
                             </p>
                             <span class="text-ft-link text-sm font-medium">
-                                {{ __('Read more') }} →
+                                {{ __('messages.posts.read_more') }} →
                             </span>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
         <!-- Posts Grid -->
         @if($posts->count() > 1)
             <div class="border-t border-ft-border pt-8">
-                <h2 class="font-serif text-2xl text-ft-black mb-6">{{ __('Latest Posts') }}</h2>
+                <h2 class="font-serif text-2xl text-ft-black mb-6">{{ __('messages.posts.latest') }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($posts->skip(1) as $post)
                         <article class="article-card p-4 -m-4 rounded-lg">
@@ -124,7 +124,7 @@
                 <svg class="w-16 h-16 text-ft-border mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
                 </svg>
-                <p class="text-ft-gray text-lg">{{ __('No posts available yet.') }}</p>
+                <p class="text-ft-gray text-lg">{{ __('messages.posts.no_posts') }}</p>
             </div>
         @endif
     </div>
