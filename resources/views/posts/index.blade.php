@@ -10,6 +10,25 @@
             <p class="text-ft-gray text-lg">{{ __('Explore our latest articles and insights.') }}</p>
         </div>
 
+        <!-- Categories Filter -->
+        @if($categories->count() > 0)
+            <div class="mb-8">
+                <h2 class="font-serif text-xl text-ft-black mb-4">{{ __('Categories') }}</h2>
+                <div class="flex flex-wrap gap-3">
+                    <a href="{{ route('posts.index') }}" 
+                       class="px-4 py-2 rounded-md text-sm font-medium transition-colors {{ $selectedCategory === null ? 'bg-ft-black text-white' : 'bg-ft-salmon-dark text-ft-black hover:bg-ft-border' }}">
+                        {{ __('All') }}
+                    </a>
+                    @foreach($categories as $category)
+                        <a href="{{ route('posts.category', $category->slug) }}" 
+                           class="px-4 py-2 rounded-md text-sm font-medium transition-colors {{ $selectedCategory?->id === $category->id ? 'bg-ft-black text-white' : 'bg-ft-salmon-dark text-ft-black hover:bg-ft-border' }}">
+                            {{ $category->getTranslation('name', app()->getLocale()) }}
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        @endif
+
         <!-- Featured Post (First Post) -->
         @if($posts->count() > 0)
             @php $featuredPost = $posts->first(); @endphp
@@ -74,6 +93,18 @@
                                         {{ $post->category->getTranslation('name', app()->getLocale()) }}
                                     </span>
                                 @endif
+                                
+                                <!-- Tags -->
+                                @if($post->tags->count() > 0)
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        @foreach($post->tags as $tag)
+                                            <span class="inline-block px-2 py-1 text-xs rounded-md bg-ft-border text-ft-black">
+                                                {{ $tag->name }}
+                                            </span>
+                                        @endforeach
+                                    </div>
+                                @endif
+                                
                                 <h3 class="font-serif text-xl text-ft-black mb-2 group-hover:text-ft-pink transition-colors">
                                     {{ $post->title }}
                                 </h3>

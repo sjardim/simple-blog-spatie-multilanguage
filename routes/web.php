@@ -24,10 +24,12 @@ Route::group(
     Route::get(LaravelLocalization::transRoute('routes.post'), [PostController::class, 'show'])
         ->name('posts.show');
 
+    // Category filtering route
+    Route::get(LaravelLocalization::transRoute('routes.news.category'), [PostController::class, 'index'])
+        ->name('posts.category');
+
     // Route::get(LaravelLocalization::transRoute('routes.news.index'), [PostController::class, 'show'])
     //     ->name('news.index');
 
-    // Route::get(LaravelLocalization::transRoute('routes.news.category'), [PostController::class, 'show'])
-    //     ->name('news.category')->where(['slug' => '[a-z0-9\-\/]*']);
         
 });

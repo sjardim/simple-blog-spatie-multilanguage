@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
 class Post extends Model implements LocalizedUrlRoutable
@@ -16,6 +17,7 @@ class Post extends Model implements LocalizedUrlRoutable
     use HasFactory;
     use HasTranslations;
     use HasTranslatableSlug;
+    use HasTags;
 
     public array $translatable = ['title', 'slug', 'content'];
 

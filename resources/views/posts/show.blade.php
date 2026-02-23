@@ -7,9 +7,20 @@
         <!-- Article Header -->
         <header class="max-w-3xl mx-auto mb-8">
             @if($post->category)
-                <a href="{{ route('posts.index') }}" class="inline-block text-ft-pink text-xs font-semibold uppercase tracking-wider mb-4 hover:underline">
+                <a href="{{ route('posts.category', $post->category->slug) }}" class="inline-block text-ft-pink text-xs font-semibold uppercase tracking-wider mb-4 hover:underline">
                     {{ $post->category->getTranslation('name', app()->getLocale()) }}
                 </a>
+            @endif
+            
+            <!-- Tags -->
+            @if($post->tags->count() > 0)
+                <div class="flex flex-wrap gap-2 mb-4">
+                    @foreach($post->tags as $tag)
+                        <span class="inline-block px-2 py-1 text-xs rounded-md bg-ft-salmon-dark text-ft-black">
+                            {{ $tag->name }}
+                        </span>
+                    @endforeach
+                </div>
             @endif
             <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-ft-black leading-tight mb-6">
                 {{ $post->title }}
