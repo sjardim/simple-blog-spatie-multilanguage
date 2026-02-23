@@ -11,7 +11,8 @@
 <h1>{{ $post->title }}</h1>
 <p>{{ $post->content }}</p>
 {{-- If current locale is Portuguese, it returns `/pt/test` --}}
-{{-- <a href="{{ LaravelLocalization::localizeUrl('/test') }}">@lang('Follow this link')</a> --}}
+{{-- <a href="{{ LaravelLocalization::localizeUrl('/test/nice-test') }}">@lang('Follow this link')</a> --}}
+{{ LaravelLocalization::localizeUrl('/test/nice-test') }}
 <p>
     {{-- Returns current url with English locale. --}}
     {{ LaravelLocalization::getLocalizedURL('en') }}

@@ -17,8 +17,14 @@ Route::group(
 
 	// Route::get('/posts/{post}', [PostController::class, 'show'])
     //     ->name('posts.show');
-    
+
      Route::get(LaravelLocalization::transRoute('routes.post'), [PostController::class, 'show'])
         ->name('posts.show');
+
+    // Route::get(LaravelLocalization::transRoute('routes.news.index'), [PostController::class, 'show'])
+    //     ->name('news.index');
+
+    // Route::get(LaravelLocalization::transRoute('routes.news.category'), [PostController::class, 'show'])
+    //     ->name('news.category')->where(['slug' => '[a-z0-9\-\/]*']);
         
 });
