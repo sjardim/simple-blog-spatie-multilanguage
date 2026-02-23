@@ -22,7 +22,7 @@
                     @foreach($categories as $category)
                         <a href="{{ route('posts.category', $category->slug) }}" 
                            class="px-4 py-2 rounded-md text-sm font-medium transition-colors {{ $selectedCategory?->id === $category->id ? 'bg-ft-black text-white' : 'bg-ft-salmon-dark text-ft-black hover:bg-ft-border' }}">
-                            {{ $category->getTranslation('name', app()->getLocale()) }}
+                            {{ $category->getTranslation('name', app()->getLocale()) }} ({{ $category->posts->count() }})
                         </a>
                     @endforeach
                 </div>

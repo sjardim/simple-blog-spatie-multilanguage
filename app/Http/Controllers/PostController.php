@@ -19,7 +19,7 @@ class PostController extends Controller
             ? $category->posts()->get()
             : Post::all();
         
-        $categories = Category::all();
+        $categories = Category::whereHas('posts')->get();
 
         return view('posts.index', [
             'posts' => $posts,
